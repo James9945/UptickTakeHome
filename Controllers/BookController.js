@@ -1,4 +1,4 @@
-const Book = require("..Models/Books.js");
+const Book = require("../Models/Books");
 
 //Control to create a book
 exports.CreateBook = async (req, res) => {
@@ -40,7 +40,7 @@ exports.UpdateOneBook = async (req, res)=> {
         if(!book){
             return res.status(404).json({message:"Book Not Found!!"})
         }
-        const updatedBook = await findById(id);
+        const updatedBook = await Book.findById(id);
         res.status(200).json(updatedBook);
     } catch (error) {
         res.status(500).json({message:error.message});

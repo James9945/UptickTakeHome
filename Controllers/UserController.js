@@ -5,10 +5,10 @@ const User = require("../Models/Users.js");
 //Registration Control
 const register = async (req, res) => {
     try{
-        const {username, password} = req.body;
-        const hashedPassword = bcrypt.hash(password, 10);
+        const {username, password, role} = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = new User({username, password: hashedPassword},role);
+        const newUser = new User({username, password: hashedPassword, role});
         await newUser.save();
         res.status(201).json({message:`User registered with username ${username}`})
     } catch (error) {

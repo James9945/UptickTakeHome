@@ -16,7 +16,7 @@ app.listen(3000, ()=>{
 app.use(express.json());
 
 
-app.use('/api/products', BooksRoutes);
+app.use('/api/books', BooksRoutes);
 app.use('/api/users', UserRoutes);
 
 
