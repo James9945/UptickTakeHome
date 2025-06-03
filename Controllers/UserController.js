@@ -6,9 +6,9 @@ const User = require("../Models/Users.js");
 const register = async (req, res) => {
     try{
         const {username, password} = req.body;
-        const hashedPassword = bycrypt.hash(password, 10);
+        const hashedPassword = bcrypt.hash(password, 10);
 
-        const newUser = new User({username, password: hashedPassword});
+        const newUser = new User({username, password: hashedPassword},role);
         await newUser.save();
         res.status(201).json({message:`User registered with username ${username}`})
     } catch (error) {
@@ -32,7 +32,7 @@ const login = async (req, res)=> {
         }
 
         const token = jwt.sign(
-            {_id: user.id},
+            {_id: user.id,role: user.role},
             process.env.JWT_SECRET,
         {expiresIn: "1h"});
 
