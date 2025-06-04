@@ -1,7 +1,7 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-
+const BookController = require('./Controllers/BookController');
 
 const BooksRoutes = require('./Routes/BooksRoutes');
 const UserRoutes = require('./Routes/UserRoutes');
@@ -18,6 +18,11 @@ app.use(express.json());
 
 app.use('/api/books', BooksRoutes);
 app.use('/api/users', UserRoutes);
+
+
+//Root route for public book listing:
+app.get('/', BookController.getAllBook);
+
 
 
 const str = process.env.MONGO_URI;
